@@ -1,0 +1,139 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model IEnumerable<LaurenIp.Models.Simula>
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeProjeto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataInico)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataFinal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValorProjeto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RiscoEnum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Participantes)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeProjeto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataInico)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataFinal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorProjeto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RiscoEnum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Participantes)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.IdCodigo }) |
+                @Html.ActionLink("Details", "Details", new { id = item.IdCodigo }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.IdCodigo })|
+
+                <a onclick="myModal(@item.ValorProjeto)">SIMULAR</a>
+                
+
+
+<td>
+                @*<a href="#Simulacao" class="edit" data-toggle="modal" data-Valor="ValorProjeto"><i class="material-icons" data-toggle="tooltip" title="Edit">Simulador</i></a>*@
+                <input type="hidden" class="id" value="@item.IdCodigo" />
+
+            </td>
+            </td>
+        </tr>
+    }
+    <!--Edit Modal Html-->
+    <div id="Simulacao" class="modal fade" >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form method="post" asp-controller="Home" asp-action="">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Simulacao</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+
+                            <label>Valor do Projeto</label>
+                            <input id="ValorProjeto" class="form-control" required="required" name="id" />
+
+                            <div class="form-group">
+                                <label>Valor do investimento</label>
+                                <input id="ValorInvest" type="text" class="form-control" required="required" name="name" />
+                            </div>
+
+                           <div class="form-group">
+                                <label>Valor Resultado</label>
+                                <input id="ValorResult" type="text" class="form-control"  name="name" disabled />
+                            </div>
+                            <input type="" id="btn-simular" onclick="SimuladAdd()" data-backdrop="static" class="btn btn-info" value="SIMULAR" />
+                        </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" onclick="cancel()" />
+                        
+                        <input type="hidden" id="id" name="id" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    
+    @section Scripts{
+        <script type="text/javascript">
+            //$('#myModal').on('shown.bs.modal', function () {
+               
+            //})
+            function myModal(value) {
+                $("#Simulacao").modal("show")
+                addValueProject(value)
+            }
+
+            function addValueProject(value) {
+                $("#ValorProjeto").val(value)
+
+            }
+            
+            function cancel() {
+                $("#ValorProjeto").val(0)
+            }
+
+            function SimuladAdd() {
+                var ValorResult = $('#ValorProjeto').parseint() + $('#ValorInvest').parseint();
+                $('#ValorResult').val(ValorResult);
+                    
+                }
+
+
+            
+        </script>
+
+    }
+</table>

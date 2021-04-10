@@ -1,0 +1,72 @@
+﻿@model LaurenIp.Models.Simula
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Simula</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeProjeto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomeProjeto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataInico)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataInico)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataFinal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataFinal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ValorProjeto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValorProjeto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RiscoEnum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RiscoEnum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Participantes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Participantes)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
